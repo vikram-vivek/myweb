@@ -40,7 +40,10 @@ python manage.py runserver
 Look into alll the files of this newly created project
 Important ones
 
-..
+manage.py
+urls.py
+settings.py
+wsgi.py
 
 9) Make changes in Timezone and adding a Static root path
 
@@ -48,3 +51,102 @@ TIME_ZONE = 'Asia/Kolkata'
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
 The STATIC_ROOT will help other OS to find the static files
+
+10) In urls.py
+
+used 
+url(r'^admin/', admin.site.urls)
+
+instead of default 
+path('admin/', admin.site.urls)
+
+11) Create superuser
+
+python manage.py crreatesuperuser
+
+Log in using the credentials
+/admin
+
+check the various feature to assigning permissions to user
+create a group, etc.
+
+12) Create an app
+
+python manage.py startapp main
+
+make changes in setting.py ->
+add 'main' in Installed_Apps list
+
+add a url pattern in urls.py
+
+url('',include('main.urls')
+
+13) Create following in the new app 'main'
+
+urls.py -> 
+templates folder
+static folder
+
+14) Create models.py
+
+Main model is created
+name same as app name: main
+but it is in Capitalized: Main
+
+from __future__ import unicode_literals
+
+this is for old language support
+
+class Main(models.Model):
+
+    name = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+14) Create Views.py
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Main
+
+# Create your views here.
+
+def home(request):
+
+    return render(request,'home.html')
+
+15) Create an html page
+
+In templates folder 
+add a home.html
+
+16) Update the urls.py of main app
+
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+
+    url(r'^home/$', views.home, name = 'home'),
+]
+
+
+17) Do the migrations
+
+python manage makemigrations
+python manage.py migrate
+
+18) Run the server
+
+python manage.py runserver
+/home will show the html file content
+
+19) Register the app
+In admins.py of main app
+
+from django.contrib import admin
+from .models import Main
+# Register your models here.
+admin.site.register(Main)
+
+
