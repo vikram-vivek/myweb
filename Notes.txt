@@ -1,0 +1,50 @@
+############################
+Notes: News App using Django
+############################
+
+
+1) Create a virtual env
+
+conda create --name news_env django==2.2.5
+
+This is to seperate a python interpretor for the news app we will be creating using django
+
+2) Activate the environment
+
+activate news_env
+
+3) Make adirectory
+
+mkdir myweb
+cd myweb
+
+4) Start a Project
+
+django-admin startproject myproject
+cd myproject
+
+5) Verify the migrations
+
+python manage.py makemigrations
+
+6) Do the migrations
+
+python manage.py migrate
+
+7) Run the server
+
+python manage.py runserver
+
+8) Some important files
+
+Look into alll the files of this newly created project
+Important ones
+
+..
+
+9) Make changes in Timezone and adding a Static root path
+
+TIME_ZONE = 'Asia/Kolkata'
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+The STATIC_ROOT will help other OS to find the static files
